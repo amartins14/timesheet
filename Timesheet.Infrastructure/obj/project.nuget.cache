@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Z0wGRnQmjuo=",
+  "dgSpecHash": "NftnxAY3/oc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\andre\\source\\repos\\Timesheet.Infrastructure\\Timesheet.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\andre\\source\\repos\\timesheet\\Timesheet.Infrastructure\\Timesheet.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\andre\\.nuget\\packages\\microsoft.extensions.configuration\\9.0.4\\microsoft.extensions.configuration.9.0.4.nupkg.sha512",
     "C:\\Users\\andre\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\9.0.4\\microsoft.extensions.configuration.abstractions.9.0.4.nupkg.sha512",

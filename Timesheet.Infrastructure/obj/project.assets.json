@@ -252,11 +252,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\andre\\source\\repos\\Timesheet.Infrastructure\\Timesheet.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\andre\\source\\repos\\timesheet\\Timesheet.Infrastructure\\Timesheet.Infrastructure.csproj",
       "projectName": "Timesheet.Infrastructure",
-      "projectPath": "C:\\Users\\andre\\source\\repos\\Timesheet.Infrastructure\\Timesheet.Infrastructure.csproj",
+      "projectPath": "C:\\Users\\andre\\source\\repos\\timesheet\\Timesheet.Infrastructure\\Timesheet.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\andre\\source\\repos\\Timesheet.Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\andre\\source\\repos\\timesheet\\Timesheet.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
