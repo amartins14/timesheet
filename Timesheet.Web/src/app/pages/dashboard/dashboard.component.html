@@ -1,0 +1,147 @@
+<div class="dashboard-container">
+    <div class="dashboard-content">
+        <div class="header-section">
+            <h1>Menu Principal</h1>
+            <div class="current-time">{{ currentTime }}</div>
+        </div>
+        <div class="grid gap-4">
+            <div class="col-12">
+                <div class="grid gap-4 mb-4">
+                    <!-- First row -->
+                    <div class="col-12 md:col-6">
+                        <p-card styleClass="time-card">
+                            <div class="today-info">
+                                <h2>Horario de Hoje</h2>
+                                <div class="time-stats">
+                                    <div class="stat">
+                                        <i class="pi pi-clock"></i>
+                                        <span>Horas trabalhadas: {{ workHours }}</span>
+                                    </div>
+                                    <div class="stat">
+                                        <i class="pi pi-calendar"></i>
+                                        <span>{{ scheduleTime }}</span>
+                                    </div>
+                                </div>
+                                <div class="schedule-table">
+                                    <p-table [value]="scheduleData" [scrollable]="true" scrollHeight="300px"
+                                        styleClass="p-datatable-sm schedule-table" responsiveLayout="scroll">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th>Hora</th>
+                                                <th>Domingo</th>
+                                                <th>Segunda</th>
+                                                <th>Terça</th>
+                                                <th>Quarta</th>
+                                                <th>Quinta</th>
+                                                <th>Sexta</th>
+                                                <th>Sábado</th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-schedule>
+                                            <tr>
+                                                <td class="hour-column">{{ schedule.hour }}</td>
+                                                <td [class.scheduled]="schedule.dom !== ''"
+                                                    [class.clock-time]="schedule.dom !== '' && schedule.dom !== '-'">
+                                                    {{ schedule.dom }}
+                                                </td>
+                                                <td [class.scheduled]="schedule.seg !== ''"
+                                                    [class.clock-time]="schedule.seg !== '' && schedule.seg !== '-'">
+                                                    {{ schedule.seg }}
+                                                </td>
+                                                <td [class.scheduled]="schedule.ter !== ''"
+                                                    [class.clock-time]="schedule.ter !== '' && schedule.ter !== '-'">
+                                                    {{ schedule.ter }}
+                                                </td>
+                                                <td [class.scheduled]="schedule.qua !== ''"
+                                                    [class.clock-time]="schedule.qua !== '' && schedule.qua !== '-'">
+                                                    {{ schedule.qua }}
+                                                </td>
+                                                <td [class.scheduled]="schedule.qui !== ''"
+                                                    [class.clock-time]="schedule.qui !== '' && schedule.qui !== '-'">
+                                                    {{ schedule.qui }}
+                                                </td>
+                                                <td [class.scheduled]="schedule.sex !== ''"
+                                                    [class.clock-time]="schedule.sex !== '' && schedule.sex !== '-'">
+                                                    {{ schedule.sex }}
+                                                </td>
+                                                <td [class.scheduled]="schedule.sab !== ''"
+                                                    [class.clock-time]="schedule.sab !== '' && schedule.sab !== '-'">
+                                                    {{ schedule.sab }}
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <p-button label="O meu Horario" icon="pi pi-clock" styleClass="p-button-outlined"
+                                    (onClick)="navigate('schedule')"></p-button>
+                            </div>
+                        </p-card>
+                    </div>
+
+                    <div class="col-12 md:col-6">
+                        <p-card styleClass="entries-card">
+                            <div class="card-content">
+                                <h2>Picagens de Hoje</h2>
+                                <p-timeline [value]="timelinePairs">
+                                    <ng-template pTemplate="marker" let-pair>
+                                        <span class="custom-marker" [class.incomplete-pair]="!pair.out" [pTooltip]="
+                                    !pair.out ? 'Registro Incompleto' : 'Registro Completo'
+                                " tooltipPosition="right"></span>
+                                    </ng-template>
+                                    <ng-template pTemplate="content" let-pair>
+                                        <div class="timeline-pair">
+                                            <div class="timeline-entry in">
+                                                <small>{{ pair.in.clockTime | date:'HH:mm' }}</small>
+                                                <p>Entrada</p>
+                                            </div>
+                                            <div class="timeline-entry out" *ngIf="pair.out">
+                                                <small>{{ pair.out.clockTime | date:'HH:mm' }}</small>
+                                                <p>Saida</p>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </p-timeline>
+                            </div>
+                            <div class="card-footer">
+                                <p-button label="Calendario" icon="pi pi-calendar" styleClass="p-button-outlined"
+                                    [badge]="missingRecords.toString()" badgeClass="p-badge-danger"
+                                    (onClick)="navigate('calendar')"></p-button>
+                            </div>
+                        </p-card>
+                    </div>
+                </div>
+                <!-- Second row -->
+                <br>
+                <div class="grid gap-4">
+                    <div class="col-12 md:col-6">
+                        <p-card styleClass="notification-card">
+                            <div class="card-content">
+                                <h2>Notificações</h2>
+                                <p>Você tem {{ notifications }} notificações pendentes</p>
+                            </div>
+                            <div class="card-footer">
+                                <p-button label="Notificações" icon="pi pi-bell" styleClass="p-button-outlined"
+                                    [badge]="notifications.toString()" badgeClass="p-badge-warning"
+                                    (onClick)="navigate('notifications')"></p-button>
+                            </div>
+                        </p-card>
+                    </div>
+
+                    <div class="col-12 md:col-6">
+                        <p-card styleClass="vacation-card">
+                            <div class="card-content">
+                                <h2>Férias</h2>
+                                <p>Gerir pedidos de férias</p>
+                            </div>
+                            <div class="card-footer">
+                                <p-button label="Férias" icon="pi pi-sun" styleClass="p-button-outlined"
+                                    (onClick)="navigate('vacation')"></p-button>
+                            </div>
+                        </p-card>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

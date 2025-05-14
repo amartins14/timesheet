@@ -1,74 +1,336 @@
-.login-container {
-    height: 100vh;
+.login-page-container {
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-800) 100%);
-    max-width: 400px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: var(--surface-card);
-    border-radius: 10px;
-    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+    background: radial-gradient(circle at center, var(--primary-dark) 0%, var(--surface-ground) 70%);
+    position: relative;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 420px;
+    margin: 2rem;
+    animation: fade-in 0.5s ease-out;
 }
 
 :host ::ng-deep .p-card {
-    min-width: 450px;
-    border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(38, 38, 38, 0.8);
     backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    padding: 1rem;
 }
 
-:host ::ng-deep .p-card .p-card-header {
-    padding: 2rem 0 0 0;
+:host ::ng-deep .p-card .p-card-content {
+    padding: 2rem;
+}
+
+.logo {
     text-align: center;
 }
 
-:host ::ng-deep .p-card .p-card-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
+.logo img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
 }
 
-.login-container h1 {
+h1 {
     text-align: center;
     color: var(--text-color);
-    margin-bottom: 2rem;
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .form-field {
     margin-bottom: 2rem;
+    position: relative;
+    width: 100%;
 }
 
-:host ::ng-deep .p-float-label input {
+:host ::ng-deep .p-float-label input,
+:host ::ng-deep .p-float-label .p-password input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    width: 100%;
+    color: var(--text-color);
+}
+
+:host ::ng-deep .p-float-label input:hover,
+:host ::ng-deep .p-float-label .p-password input:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+:host ::ng-deep .p-float-label input:focus,
+:host ::ng-deep .p-float-label .p-password input:focus {
+    border-color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+:host ::ng-deep .p-float-label label {
+    margin-left: 0.5rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+:host ::ng-deep .p-float-label input:focus ~ label,
+:host ::ng-deep .p-float-label input.p-filled ~ label {
+    color: var(--primary-color) !important;
+    font-weight: 500;
+}
+
+:host ::ng-deep .p-button.login-button {
+    margin-top: 2rem;
+    height: 3.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    border: none;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+:host ::ng-deep .p-button.login-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.35);
+}
+
+:host ::ng-deep .p-button.login-button:active {
+    transform: translateY(0);
+}
+
+:host ::ng-deep .p-password i {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+:host ::ng-deep .p-float-label,
+:host ::ng-deep .p-password,
+:host ::ng-deep .p-password input,
+:host ::ng-deep .p-inputtext {
     width: 100%;
 }
 
 :host ::ng-deep .p-password {
     width: 100%;
+    position: relative;
 }
 
-:host ::ng-deep .p-password input {
+:host ::ng-deep .p-password-input {
+    width: 100% !important;
+    padding-right: 2.5rem !important;
+}
+
+:host ::ng-deep .p-password i.p-password-eye {
+    position: absolute;
+    right: 0.75rem !important;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.6);
+    transition: color 0.3s ease;
+}
+
+:host ::ng-deep .p-password i.p-password-eye:hover {
+    color: var(--primary-color);
+}
+
+:host ::ng-deep .p-password-input {
+    width: 100% !important;
+}
+
+:host ::ng-deep .p-password i.p-password-eye {
+    right: 1rem;
+    margin-top: -0.75rem;
+}
+
+:host ::ng-deep .form-field .p-password {
+    display: block;
     width: 100%;
+    position: relative;
 }
 
-:host ::ng-deep .p-button {
-    padding: 1rem;
+:host ::ng-deep .p-password .p-inputtext {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1rem 3rem 1rem 1.2rem !important;
     font-size: 1.1rem;
+    transition: all 0.3s ease;
+    color: var(--text-color);
 }
 
-:host ::ng-deep .p-button:focus {
-    box-shadow: none;
+:host ::ng-deep .p-password .p-inputtext:hover {
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
-.logo {
-    text-align: center;
-    margin-bottom: 2rem;
+:host ::ng-deep .p-password .p-inputtext:focus {
+    border-color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
 }
 
-.logo img {
-    width: 120px;
-    height: auto;
+:host ::ng-deep .p-password i.pi-eye,
+:host ::ng-deep .p-password i.pi-eye-slash {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    z-index: 2;
+}
+
+:host ::ng-deep .p-password .p-password-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+:host ::ng-deep .p-password .p-password-panel {
+    background: var(--surface-card);
+    border: 1px solid var(--surface-border);
+}
+
+:host ::ng-deep .p-password-meter {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+:host ::ng-deep .p-input-icon-right > i,
+:host ::ng-deep .p-password i {
+    right: 1rem;
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+:host ::ng-deep .p-input-icon-right > input {
+    padding-right: 2.5rem;
+}
+
+.bottom-actions {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+}
+
+:host ::ng-deep .bottom-actions .p-button {
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+}
+
+:host ::ng-deep .bottom-actions .p-button .p-button-icon {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fade-in 0.5s ease-out;
+}
+
+.fade-in-down {
+    animation: fade-in 0.5s ease-out 0.2s both;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 576px) {
+    .login-container {
+        margin: 1rem;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .logo img {
+        width: 100px;
+    }
+}
+
+:host ::ng-deep {
+    .p-float-label {
+        width: 100%;
+        display: block;
+    }
+
+    .p-password {
+        display: block;
+        width: 100%;
+
+        input {
+            width: 100%;
+            padding-right: 3rem;
+        }
+
+        .p-password-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1rem 3rem 1rem 1.2rem;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        i {
+            position: absolute;
+            right: 1rem !important;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            color: rgba(255, 255, 255, 0.6);
+        }
+    }
+}
+
+.password-container {
+    position: relative;
+    width: 100%;
+    display: block;
+}
+
+.eye-button {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+.eye-button:hover {
+    color: var(--primary-color);
+}
+
+.eye-button i {
+    font-size: 1.2rem;
 }

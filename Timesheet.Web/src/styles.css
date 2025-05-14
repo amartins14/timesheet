@@ -1,1 +1,72 @@
+@import "https://cdn.jsdelivr.net/npm/primeng@16.4.1/resources/themes/vela-blue/theme.css";
+@import "https://cdn.jsdelivr.net/npm/primeng@16.4.1/resources/primeng.min.css";
+@import "https://cdn.jsdelivr.net/npm/primeicons@6.0.1/primeicons.css";
+
 /* You can add global styles to this file, and also import other style files */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --surface-ground: #121212;
+  --surface-section: #1e1e1e;
+  --surface-card: rgba(38, 38, 38, 0.8);
+  --surface-overlay: rgba(255, 255, 255, 0.05);
+  --surface-border: rgba(255, 255, 255, 0.1);
+  --text-color: #f8f9fa;
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --primary-color: #3B82F6;
+  --primary-light: #60a5fa;
+  --primary-dark: #2563eb;
+}
+
+body {
+  background: radial-gradient(circle at center, var(--primary-dark) 0%, var(--surface-ground) 70%);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.p-card {
+  background: var(--surface-card) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--surface-border);
+  border-radius: 1.5rem !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+}
+
+.p-button {
+  border-radius: 12px !important;
+  transition: all 0.3s ease !important;
+}
+
+.p-button:not(.p-button-outlined) {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%) !important;
+  border: none !important;
+}
+
+.p-button.p-button-outlined {
+  border: 2px solid var(--primary-color) !important;
+  color: var(--primary-light) !important;
+}
+
+.p-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.35) !important;
+}
+
+/* Tablet-specific font adjustments */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  html {
+    font-size: 14px;
+  }
+}

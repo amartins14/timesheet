@@ -10,10 +10,8 @@ import { AdministrationComponent } from './pages/administration/administration.c
 import { VacationComponent } from './pages/vacation/vacation.component';
 
 export const routes: Routes = [
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -50,12 +48,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: '',
-    redirectTo: '/dashboard',
-    pathMatch: 'full',
-  },
-  {
     path: '**',
-    redirectTo: '/dashboard',
+    redirectTo: 'dashboard',
   },
 ];

@@ -1,11 +1,144 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { TimelineModule } from 'primeng/timeline';
+import { BadgeModule } from 'primeng/badge';
+import { DividerModule } from 'primeng/divider';
+import { TooltipModule } from 'primeng/tooltip';
+import { TableModule } from 'primeng/table';
+import { Schedule } from '../../Models/schedule.model';
+import { ClockRecord } from '../../Models/clockRecord.model';
+
+interface DisplaySchedule {
+  hour: string;
+  dom: string;
+  seg: string;
+  ter: string;
+  qua: string;
+  qui: string;
+  sex: string;
+  sab: string;
+}
 
 @Component({
   selector: 'app-dashboard',
-  template: `
-    <h1>Dashboard</h1>
-    <p>Welcome to your timesheet dashboard!</p>
-  `,
-  styles: [],
+  standalone: true,
+  imports: [
+    CommonModule,
+    ButtonModule,
+    CardModule,
+    TimelineModule,
+    BadgeModule,
+    DividerModule,
+    TooltipModule,
+    TableModule,
+  ],
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent {}
+export class DashboardComponent implements OnInit {
+  // Mock week schedules (Sunday to Saturday)
+  private weekSchedules: Schedule[] = [
+    {
+      userId: 1,
+      date: new Date(),
+      start: new Date(2025, 5, 14, 9, 0, 0),
+      end: new Date(2025, 5, 14, 17, 0, 0),
+    },
+    {
+      userId: 1,
+      date: new Date(2025, 5, 13),
+      start: new Date(2025, 5, 13, 9, 0, 0),
+      end: new Date(2025, 5, 13, 17, 0, 0),
+    },
+  ];
+
+  // Mock clocks for the week (starting Sunday)
+  private weekClocks: ClockRecord[] = [
+    // Monday
+    {
+      userId: 1,
+      date: new Date(2025, 5, 12),
+      clockTime: new Date(2025, 5, 12, 8, 55),
+    },
+    {
+      userId: 1,
+      date: new Date(2025, 5, 12),
+      clockTime: new Date(2025, 5, 12, 12, 0),
+    },
+    {
+      userId: 1,
+      date: new Date(2025, 5, 12),
+      clockTime: new Date(2025, 5, 12, 13, 0),
+    },
+    {
+      userId: 1,
+      date: new Date(2025, 5, 12),
+      clockTime: new Date(2025, 5, 12, 18, 5),
+    },
+    // Tuesday
+    {
+      userId: 1,
+      date: new Date(2025, 5, 13),
+      clockTime: new Date(2025, 5, 13, 9, 2),
+    },
+    {
+      userId: 1,
+      date: new Date(2025, 5, 13),
+      clockTime: new Date(2025, 5, 13, 12, 0),
+    },
+    {
+      userId: 1,
+      date: new Date(2025, 5, 13),
+      clockTime: new Date(2025, 5, 13, 13, 0),
+    },
+    {
+      userId: 1,
+      date: new Date(2025, 5, 13),
+      clockTime: new Date(2025, 5, 13, 18, 0),
+    },
+  ];
+
+  currentTime = '';
+  workHours = '8h 30m';
+  scheduleTime = 'Sem horario por hoje!';
+  scheduleData = [];
+  timelinePairs = [];
+  missingRecords = 2;
+  notifications = 3;
+
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    this.updateTime();
+    setInterval(() => this.updateTime(), 1000);
+    this.scheduleTime = this.getScheduleTime();
+  }
+
+  updateTime() {
+    this.currentTime = new Date().toLocaleString('pt-PT').replace(',', ' -');
+  }
+
+  navigate(route: string) {
+    this.router.navigate([`/${route}`]);
+  }
+
+  getScheduleTime() {
+    const schedule = this.weekSchedules.find(
+      (record) =>
+        record.userId.toString() === sessionStorage.getItem('user') &&
+        record.date.getDay() === new Date().getDay()
+    );
+    if (schedule) {
+      return schedule
+        ? `${schedule.start?.toLocaleTimeString(
+            'pt-PT'
+          )} - ${schedule.end?.toLocaleTimeString('pt-PT')}`
+        : '';
+    } else {
+      return 'Sem horário por hoje!';
+    }
+  }
+}
