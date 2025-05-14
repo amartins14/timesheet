@@ -122,7 +122,7 @@ export class DashboardComponent implements OnInit {
   ];
 
   currentTime = '';
-  workHours = '8h 30m';
+  workHours = '0h 0m';
   scheduleTime = 'Sem horario por hoje!';
   scheduleData = [];
   timelinePairs = [];
@@ -135,6 +135,7 @@ export class DashboardComponent implements OnInit {
     this.updateTime();
     setInterval(() => this.updateTime(), 1000);
     this.scheduleTime = this.calcScheduleTime();
+    this.workHours = this.calcWorkHours();
   }
 
   updateTime() {
@@ -178,6 +179,6 @@ export class DashboardComponent implements OnInit {
         return `${hours}h ${minutes}m`;
       }
     }
-    return 'Sem horas realizadas!';
+    return '0h 0m';
   }
 }
