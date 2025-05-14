@@ -39,7 +39,7 @@ interface DisplaySchedule {
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  // Mock week schedules (Sunday to Saturday)
+  // Mock week schedules (add Sunday to Saturday)
   private weekSchedules: Schedule[] = [
     {
       userId: 1,
@@ -99,6 +99,26 @@ export class DashboardComponent implements OnInit {
       date: new Date(2025, 5, 13),
       clockTime: new Date(2025, 5, 13, 18, 0),
     },
+    {
+      userId: 1,
+      date: new Date(2025, 5, 13),
+      clockTime: new Date(2025, 5, 14, 9, 2),
+    },
+    {
+      userId: 1,
+      date: new Date(2025, 5, 13),
+      clockTime: new Date(2025, 5, 14, 12, 0),
+    },
+    {
+      userId: 1,
+      date: new Date(2025, 5, 13),
+      clockTime: new Date(2025, 5, 14, 13, 0),
+    },
+    {
+      userId: 1,
+      date: new Date(2025, 5, 13),
+      clockTime: new Date(2025, 5, 14, 18, 0),
+    },
   ];
 
   currentTime = '';
@@ -114,7 +134,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.updateTime();
     setInterval(() => this.updateTime(), 1000);
-    this.scheduleTime = this.getScheduleTime();
+    this.scheduleTime = this.calcScheduleTime();
   }
 
   updateTime() {
@@ -125,7 +145,7 @@ export class DashboardComponent implements OnInit {
     this.router.navigate([`/${route}`]);
   }
 
-  getScheduleTime() {
+  calcScheduleTime() {
     const schedule = this.weekSchedules.find(
       (record) =>
         record.userId.toString() === sessionStorage.getItem('user') &&
@@ -140,5 +160,24 @@ export class DashboardComponent implements OnInit {
     } else {
       return 'Sem horário por hoje!';
     }
+  }
+
+  calcWorkHours() {
+    const schedule = this.weekSchedules.find(
+      (record) =>
+        record.userId.toString() === sessionStorage.getItem('user') &&
+        record.date.getDay() === new Date().getDay()
+    );
+    if (schedule) {
+      const start = schedule.start?.getTime();
+      const end = schedule.end?.getTime();
+      if (start && end) {
+        const diff = end - start;
+        const hours = Math.floor(diff / 3600000);
+        const minutes = Math.floor((diff % 3600000) / 60000);
+        return `${hours}h ${minutes}m`;
+      }
+    }
+    return 'Sem horas realizadas!';
   }
 }
